@@ -4,7 +4,7 @@ COPY go.mod ./
 COPY *.go ./
 RUN CGO_ENABLED=0 GOOS=linux go build -trimpath -ldflags="-s -w" -o /out/external-monitor .
 
-FROM alpine:3.22
+FROM alpine:3.24
 RUN apk add --no-cache ca-certificates tzdata \
     && addgroup -S monitor \
     && adduser -S -G monitor -h /nonexistent monitor
