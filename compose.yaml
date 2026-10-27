@@ -1,0 +1,38 @@
+name: external-monitor
+
+services:
+  monitor:
+    image: ghcr.io/lewismartin7/external-monitor:latest
+    container_name: external-monitor
+    restart: unless-stopped
+    environment:
+      TZ: ${TZ:-America/Toronto}
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_TLS: ${SMTP_TLS:-starttls}
+      SMTP_USERNAME: ${SMTP_USERNAME:-}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      SMTP_FROM: ${SMTP_FROM:-}
+      SMTP_TO: ${SMTP_TO:-}
+      SEND_TEST_EMAIL_ON_START: ${SEND_TEST_EMAIL_ON_START:-false}
+    user: "99:100"
+    volumes:
+      - ./config/config.json:/config/config.json:ro
+      - ./data:/data
+    ports:
+      - "${DASHBOARD_BIND_IP:-0.0.0.0}:${DASHBOARD_PORT:-8099}:8080"
+    read_only: true
+    tmpfs:
+      - /tmp:size=16m,noexec,nosuid,nodev
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    pids_limit: 64
+    mem_limit: 64m
+    healthcheck:
+      test: ["CMD", "/usr/local/bin/external-monitor", "-healthcheck"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s

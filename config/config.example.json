@@ -1,0 +1,14 @@
+{
+  "site_name": "External Services",
+  "email_display_name": "External Monitor",
+  "interval_seconds": 60,
+  "timeout_seconds": 12,
+  "failures_before_alert": 3,
+  "successes_before_recovery": 2,
+  "certificate_warning_days": 14,
+  "targets": [
+    { "name": "Photos", "url": "https://photos.example.com/api/server/ping", "expected_status": [200] },
+    { "name": "Media", "url": "https://media.example.com/identity", "expected_status": [200] },
+    { "name": "Website", "url": "https://www.example.com/", "expected_status": [200], "contains": "Example" }
+  ]
+}

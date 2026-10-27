@@ -1,0 +1,4 @@
+.env
+config/config.json
+data/state.json
+email-preview.html

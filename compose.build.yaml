@@ -1,0 +1,4 @@
+services:
+  monitor:
+    build: .
+    image: external-monitor:local
