@@ -1,0 +1,6 @@
+{
+  "name": "Climate",
+  "url": "https://climate.15cl.net/healthz",
+  "expected_status": [200],
+  "contains": "\"status\":\"ok\""
+}

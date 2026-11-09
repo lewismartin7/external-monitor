@@ -88,6 +88,19 @@ docker compose up -d
 
 The private `.env`, `config/config.json`, and `data/state.json` files remain outside the image and are not replaced.
 
+### Adding Climate
+
+The Climate target is provided in `config/climate.target.json`. After pulling
+this repository, copy that object into the `targets` array in your existing
+`config/config.json` (add a comma between adjacent target objects), then run:
+
+```sh
+docker compose restart monitor
+```
+
+This checks `https://climate.15cl.net/healthz` for HTTP 200 and the healthy
+response text. Pulling the repository alone does not update the active target list.
+
 ## Local development
 
 ```sh
