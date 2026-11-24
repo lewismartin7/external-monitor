@@ -1,4 +1,28 @@
+# Private environment and monitored endpoints
 .env
-config/config.json
-data/state.json
+.env.*
+!.env.example
+config/*.json
+!config/config.example.json
+
+# Runtime state (including temporary replacements); retain empty-directory marker
+data/*
+!data/.gitkeep
 email-preview.html
+
+# Private backups and local output
+*.bak
+*.bak.*
+*.backup
+*.backup.*
+backups/
+.envrc
+bin/
+dist/
+coverage.out
+coverage.html
+*.test
+external-monitor
+external-monitor.exe
+.DS_Store
+Thumbs.db
