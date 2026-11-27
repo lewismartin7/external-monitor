@@ -1,5 +1,9 @@
 # Architecture
 
+## System boundaries
+
+Run External Monitor on a host independent of the services it checks so it can detect outages from outside their network. The monitor uses outbound DNS, HTTP(S), and SMTP. Its dashboard and status API are intended for a trusted LAN. See [Installation](operations.md#installation) for the host and container settings.
+
 ## Source and dependencies
 
 | Path | Responsibility |
@@ -24,7 +28,7 @@ Each target serializes its own checks and notifications. Different targets run c
 
 New targets start unknown. First success changes unknown to up. First failure changes unknown to pending; the configured consecutive failure threshold changes status to down and queues DOWN. Recovery from down requires the success threshold and queues RECOVERED only if a DOWN mail was acknowledged. Failed mail remains pending and is retried on later checks. Certificate warnings are keyed by expiry date (YYYY-MM-DD) and acknowledged only after mail succeeds.
 
-Known edge case: pending does not explicitly become up on success before reaching down. Do not silently change this in a documentation task. Pending DOWN mail may also still be retried while successful checks have not yet reached the recovery threshold.
+Known edge case: pending does not explicitly become up on success before reaching down. Pending DOWN mail may also still be retried while successful checks have not yet reached the recovery threshold.
 
 ## Persistence and identity
 
@@ -50,8 +54,8 @@ Renaming a target starts a new identity; removed names remain in saved state but
 
 Handlers do not restrict HTTP methods or authenticate clients. There are no mutation/configuration APIs, live dashboard refresh, CORS policy or application TLS listener. /api/status exposes target addresses and diagnostic details. Health does not establish target health, SMTP delivery or state durability. The -healthcheck CLI always probes 127.0.0.1:8080, even if LISTEN_ADDR is overridden.
 
-## Mail and test coverage
+## Email delivery
 
 SMTP supports implicit TLS or STARTTLS with minimum TLS 1.2. Other mode strings take the unupgraded connection path; only the documented secure modes should be configured. Authentication uses smtp.PlainAuth when username is nonempty. Headers reject CR/LF in subject, sender and recipients; MIME uses quoted-printable text/plain and text/html alternatives. Presentation values are escaped.
 
-Tests cover config defaults, rejecting a file URL, integer membership, multipart email, HTML escaping/down styling and sender display formatting. No current tests cover polling transitions, HTTP handlers, persistence failure/restart, SMTP retries, TLS expiry, redirects or concurrent access. No browser/integration suite exists. See [handoff](HANDOFF.md) for verification actually performed.
+See [Testing](testing.md) for current coverage and release checks.

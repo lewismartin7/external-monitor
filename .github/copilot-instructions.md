@@ -1,6 +1,6 @@
 # External Monitor repository instructions
 
-Read [README](../README.md), [handoff](../docs/HANDOFF.md), [architecture](../docs/ARCHITECTURE.md) and [operations](../docs/OPERATIONS.md) before changes.
+Read [README](../README.md), [architecture](../docs/architecture.md), [operations](../docs/operations.md), [testing](../docs/testing.md), and [to-do](../docs/todo.md) before changes.
 
 - Keep the small Go standard-library implementation. The module and Docker build currently require Go 1.27.3. No third-party Go modules or frontend build exist.
 - Preserve independent HTTP(S) checks, configured status/text matching, failure/recovery thresholds, pending email retries, certificate warning acknowledgement and multipart escaped HTML/plain-text mail.
