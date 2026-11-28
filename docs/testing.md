@@ -50,11 +50,11 @@ For an intentional deployment delivery test, set **SEND_TEST_EMAIL_ON_START=true
 
 ## Recovery checks
 
-Restart against the same disposable state and confirm status and counters persist. Restore a saved copy of the fixture config and state using the [restore workflow](operations.md#backup-and-restore), then confirm polling resumes and pending alerts behave as expected.
+Restart against the same disposable state and confirm status and counters persist. Restore a saved copy of the fixture config and state using the [restore workflow](Project%20Docs/external-monitor/docs/operations.md#backup-and-restore), then confirm polling resumes and pending alerts behave as expected.
 
 ## Release criteria
 
 - Go tests and vet pass. Run the isolated workflow for any changed polling, email, or persistence behavior.
 - The linux/amd64 image builds and its health check passes with disposable config and data.
 - If config or state compatibility changes, validate restore and rollback and document migration steps before release.
-- Before publishing or moving repositories, confirm the intended repository visibility, GHCR permissions, and image coordinates. Review history privately for previously committed deployment details. [Operations](operations.md#upgrades) explains workflow triggers.
+- Before publishing or moving repositories, confirm the intended repository visibility, GHCR permissions, and image coordinates. Review history privately for previously committed deployment details. [Operations](Project%20Docs/external-monitor/docs/operations.md#upgrades) explains workflow triggers.
