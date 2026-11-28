@@ -2,7 +2,7 @@
 
 ## System boundaries
 
-Run External Monitor on a host independent of the services it checks so it can detect outages from outside their network. The monitor uses outbound DNS, HTTP(S), and SMTP. Its dashboard and status API are intended for a trusted LAN. See [Installation](operations.md#installation) for the host and container settings.
+Run External Monitor on a host independent of the services it checks so it can detect outages from outside their network. The monitor uses outbound DNS, HTTP(S), and SMTP. Its dashboard and status API are intended for a trusted LAN. See [Installation](Project%20Docs/external-monitor/docs/operations.md#installation) for the host and container settings.
 
 ## Source and dependencies
 
@@ -58,4 +58,4 @@ Handlers do not restrict HTTP methods or authenticate clients. There are no muta
 
 SMTP supports implicit TLS or STARTTLS with minimum TLS 1.2. Other mode strings take the unupgraded connection path; only the documented secure modes should be configured. Authentication uses smtp.PlainAuth when username is nonempty. Headers reject CR/LF in subject, sender and recipients; MIME uses quoted-printable text/plain and text/html alternatives. Presentation values are escaped.
 
-See [Testing](testing.md) for current coverage and release checks.
+See [Testing](Project%20Docs/external-monitor/docs/testing.md) for current coverage and release checks.
