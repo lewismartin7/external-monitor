@@ -51,9 +51,9 @@ Open the dashboard at `http://DOCKER-HOST-LAN-IP:8099`. The dashboard and status
 
 ## How to use the app
 
-Open the LAN dashboard to see each target’s status, last check, latency, and details. For a machine-readable view use **/api/status**. Use [Alert state](architecture.md#alert-state) to interpret pending, down, and recovery transitions.
+Open the LAN dashboard to see each target’s status, last check, latency, and details. For a machine-readable view use **/api/status**. Use [Alert state](Project%20Docs/external-monitor/docs/architecture.md#alert-state) to interpret pending, down, and recovery transitions.
 
-To add or update a target, edit the private **config/config.json**, validate the JSON, and run **docker compose up -d --force-recreate monitor**. Recreation reloads config even when an editor replaced the bind-mounted file. Choose target names deliberately because [saved state is keyed by name](architecture.md#persistence-and-identity).
+To add or update a target, edit the private **config/config.json**, validate the JSON, and run **docker compose up -d --force-recreate monitor**. Recreation reloads config even when an editor replaced the bind-mounted file. Choose target names deliberately because [saved state is keyed by name](Project%20Docs/external-monitor/docs/architecture.md#persistence-and-identity).
 
 ## Configuration
 
@@ -102,7 +102,7 @@ curl --fail http://DOCKER-HOST-LAN-IP:8099/api/status
 
 Use the configured LAN bind address instead of loopback if applicable. Status output and logs can contain private endpoint information; redact before sharing. Container health checks run every 30s, timeout 5s, retries 3, start period 10s, but check only the local HTTP endpoint.
 
-Confirm that the configured targets appear in the API and receive a recent check. Monitor service health and logs for repeated state-write errors or SMTP failures. Use the [email delivery check](testing.md#email-delivery-check) for an intentional delivery test.
+Confirm that the configured targets appear in the API and receive a recent check. Monitor service health and logs for repeated state-write errors or SMTP failures. Use the [email delivery check](Project%20Docs/external-monitor/docs/testing.md#email-delivery-check) for an intentional delivery test.
 
 ## Troubleshooting
 
